@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "drf_yasg"
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -74,9 +74,7 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-
-}
+DATABASES = {}
 
 
 # Password validation
@@ -121,5 +119,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SWAGGER_SETTINGS = {
-   "DEFAULT_INFO": "django_project.urls.app_info",
+    "DEFAULT_INFO": "django_project.urls.app_info",
 }
