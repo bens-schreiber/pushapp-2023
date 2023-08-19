@@ -1,0 +1,51 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Snippets API",
+        "description": "Test description",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "contact@snippets.local"
+        },
+        "license": {
+            "name": "BSD License"
+        },
+        "version": "v1"
+    },
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "Basic": []
+        }
+    ],
+    "paths": {
+        "/hello-world": {
+            "get": {
+                "operationId": "hello-world_list",
+                "description": "This is a brief description of what this endpoint does.\n---",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success response description"
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {}
+}
