@@ -5,12 +5,8 @@ from drf_yasg import openapi
 from pages.views import hello_world
 
 app_info = openapi.Info(
-    title="Snippets API",
+    title="Pushapp API",
     default_version="v1",
-    description="Test description",
-    terms_of_service="https://www.google.com/policies/terms/",
-    contact=openapi.Contact(email="contact@snippets.local"),
-    license=openapi.License(name="BSD License"),
 )
 
 schema_view = get_schema_view(
@@ -21,12 +17,12 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path(
-        "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
-    ),
-    path(
-        "swagger/",
+        "",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
+    ),
+    path(
+        "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("hello-world", hello_world, name="hello_world"),
