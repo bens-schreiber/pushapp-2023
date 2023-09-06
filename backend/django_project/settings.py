@@ -74,8 +74,28 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {}
-
+DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'test',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'localhost',
+                'port': 27017,
+                'username': 'admin',
+                'password': 'admin',
+            },
+            'LOGGING': {
+                'version': 1,
+                'loggers': {
+                    'djongo': {
+                        'level': 'DEBUG',
+                        'propagate': False,                        
+                    }
+                },
+             },
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
