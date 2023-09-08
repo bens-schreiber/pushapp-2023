@@ -21,5 +21,15 @@ To run the backend:
    * `python manage.py migrate`
    * `python manage.py runserver`
 
+## Running after initial setup
+
+`./run-server.ps1`
+
+## To run the swagger doc only
+
+`rm swagger.json && python manage.py generate_swagger swagger.json`
+
+## Notes
+
 Interact with the API via the Swagger backend
 Use MongoExpress for editing the database directly
