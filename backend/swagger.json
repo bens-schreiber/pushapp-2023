@@ -38,11 +38,31 @@
             },
             "post": {
                 "operationId": "hello-world_create",
-                "description": "Posts a generic entry to pages_entry",
-                "parameters": [],
+                "description": "Posts an entry to pages_entry",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "key, value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Hello, world!"
+                        "description": "Created"
                     }
                 },
                 "tags": [
@@ -59,11 +79,11 @@
                         "required": true,
                         "schema": {
                             "required": [
-                                "id"
+                                "key"
                             ],
                             "type": "object",
                             "properties": {
-                                "id": {
+                                "key": {
                                     "type": "string"
                                 }
                             }
@@ -72,7 +92,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Hello, world!"
+                        "description": "Entry updated"
                     }
                 },
                 "tags": [
