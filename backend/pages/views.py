@@ -1,30 +1,65 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework.request import Request
-from pages.models import Entry
+from rest_framework.views import APIView
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+
+import pages.impl.hello_world as impl
+from pages.impl.hello_world import insert_pages_entry, update_pages_entry
+
+"""
+When we are creating a view that is overloaded (IE, multiple HTTP methods on one endpoint), 
+we will use the APIView CBV (Class Based View).
+
+However, if a view uses only one method, we will use the function-based view (FBV)
+
+In both cases, swagger documentation is generated from the docstrings of the view.
+
+In both cases, if a view is more complex (cannot be represented in only the form return Response(...)),
+we will move the implementation to a separate file
+"""
 
 
-@api_view(["POST"])
-def hello_world(request: Request):
+class HelloWorld(APIView):
     """
-    This is a brief description of what this endpoint does.
-    ---
-    parameters:
-      - name: parameter_name
-        description: Description of the parameter
-        required: true
-        type: string
-    responses:
-      201:
-        description: Successful response description
+    A set of example endpoints for future reference
     """
 
-    e = Entry()
-    e.blog = {
-        'name': 'Djongo'
-    }
-    e.headline = 'The Django MongoDB connector'
-    e.save()
+    @swagger_auto_schema(
+        operation_description="Returns a 'Hello World' string",
+        responses={
+            200: "Hello, world!",
+        },
+    )
+    def get(self, request: Request):
+        return Response({"message": "Hello, world!"}, status=200)
 
-    return Response({"message": "Hello, world!"})
+    @swagger_auto_schema(
+        operation_description="Posts a generic entry to pages_entry",
+        responses={
+            201: "Hello, world!",
+        },
+    )
+    def post(self, request: Request):
+        impl.insert_pages_entry()
+        return Response({"message": "Hello, world!"}, status=201)
+
+    @swagger_auto_schema(
+        operation_description="Updates a generic entry in pages_entry",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=["id"],
+            properties={
+                "id": openapi.Schema(type=openapi.TYPE_STRING),
+            },
+        ),
+        responses={
+            200: "Hello, world!",
+        },
+    )
+    def put(self, request: Request):
+        if "id" not in request.data:
+            return Response({"message": "id parameter not found"}, status=400)
+
+        impl.update_pages_entry(request.data["id"])
+        return Response({"message": "Hello, world!"}, status=200)
