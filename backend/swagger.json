@@ -1,40 +1,19 @@
 {
     "swagger": "2.0",
-    "info": {
-        "title": "Pushapp API",
-        "version": "v1"
-    },
+    "info": {"title": "Pushapp API", "version": "v1"},
     "basePath": "/",
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "securityDefinitions": {
-        "Basic": {
-            "type": "basic"
-        }
-    },
-    "security": [
-        {
-            "Basic": []
-        }
-    ],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "securityDefinitions": {"Basic": {"type": "basic"}},
+    "security": [{"Basic": []}],
     "paths": {
         "/hello-world/": {
             "get": {
                 "operationId": "hello-world_list",
                 "description": "Returns a 'Hello World' string",
                 "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Hello, world!"
-                    }
-                },
-                "tags": [
-                    "hello-world"
-                ]
+                "responses": {"200": {"description": "Hello, world!"}},
+                "tags": ["hello-world"],
             },
             "post": {
                 "operationId": "hello-world_create",
@@ -45,29 +24,17 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "required": [
-                                "key, value"
-                            ],
+                            "required": ["key, value"],
                             "type": "object",
                             "properties": {
-                                "key": {
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+                                "key": {"type": "string"},
+                                "value": {"type": "string"},
+                            },
+                        },
                     }
                 ],
-                "responses": {
-                    "201": {
-                        "description": "Created"
-                    }
-                },
-                "tags": [
-                    "hello-world"
-                ]
+                "responses": {"201": {"description": "Created"}},
+                "tags": ["hello-world"],
             },
             "put": {
                 "operationId": "hello-world_update",
@@ -78,29 +45,17 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "required": [
-                                "key"
-                            ],
+                            "required": ["key"],
                             "type": "object",
-                            "properties": {
-                                "key": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+                            "properties": {"key": {"type": "string"}},
+                        },
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Entry updated"
-                    },
-                    "404": {
-                        "description": "Entry does not exist"
-                    }
+                    "200": {"description": "Entry updated"},
+                    "404": {"description": "Entry does not exist"},
                 },
-                "tags": [
-                    "hello-world"
-                ]
+                "tags": ["hello-world"],
             },
             "delete": {
                 "operationId": "hello-world_delete",
@@ -111,29 +66,20 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "required": [
-                                "key"
-                            ],
+                            "required": ["key"],
                             "type": "object",
-                            "properties": {
-                                "key": {
-                                    "type": "string"
-                                }
-                            }
-                        }
+                            "properties": {"key": {"type": "string"}},
+                        },
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Entry deleted"
-                    }
+                    "200": {"description": "Entry deleted"},
+                    "404": {"description": "Entry does not exist"},
                 },
-                "tags": [
-                    "hello-world"
-                ]
+                "tags": ["hello-world"],
             },
-            "parameters": []
+            "parameters": [],
         }
     },
-    "definitions": {}
+    "definitions": {},
 }
