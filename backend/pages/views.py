@@ -78,9 +78,7 @@ class HelloWorld(APIView):
                 "key": openapi.Schema(type=openapi.TYPE_STRING),
             },
         ),
-        responses={
-            200: "Entry deleted",
-        },
+        responses={200: "Entry deleted", 404: "Entry does not exist"},
     )
     def delete(self, request: Request):
         return impl.hello_world_delete(request)

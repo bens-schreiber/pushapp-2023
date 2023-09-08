@@ -17,7 +17,7 @@ def hello_world_put(request: Request) -> Response:
     if (r := util.validate_params(request, "key")) is not None:
         return r
 
-    if not Entry.objects.filter(key=request.data["key"]).exists():
+    if not util.entry_exists(request.data["key"]):
         return Response({"message": "Entry does not exist"}, status=404)
 
     util.update_pages_entry(Entry.objects.get(key=request.data["key"]))
@@ -29,7 +29,7 @@ def hello_world_delete(request: Request) -> Response:
     if (r := util.validate_params(request, "key")) is not None:
         return r
 
-    if not Entry.objects.filter(key=request.data["key"]).exists():
+    if not util.entry_exists(request.data["key"]):
         return Response({"message": "Entry does not exist"}, status=404)
 
     Entry.objects.get(key=request.data["key"]).delete()
