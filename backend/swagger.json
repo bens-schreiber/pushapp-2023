@@ -1,15 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Snippets API",
-        "description": "Test description",
-        "termsOfService": "https://www.google.com/policies/terms/",
-        "contact": {
-            "email": "contact@snippets.local"
-        },
-        "license": {
-            "name": "BSD License"
-        },
+        "title": "Pushapp API",
         "version": "v1"
     },
     "basePath": "/",
@@ -30,14 +22,57 @@
         }
     ],
     "paths": {
-        "/hello-world": {
+        "/hello-world/": {
             "get": {
                 "operationId": "hello-world_list",
-                "description": "This is a brief description of what this endpoint does.\n---",
+                "description": "Returns a 'Hello World' string",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Success response description"
+                        "description": "Hello, world!"
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "post": {
+                "operationId": "hello-world_create",
+                "description": "Posts a generic entry to pages_entry",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "Hello, world!"
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "put": {
+                "operationId": "hello-world_update",
+                "description": "Updates a generic entry in pages_entry",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "id"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hello, world!"
                     }
                 },
                 "tags": [
