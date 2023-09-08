@@ -4,8 +4,9 @@ from rest_framework.views import APIView
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
+from pages.models import Entry
+
 import pages.impl.hello_world as impl
-from pages.impl.hello_world import insert_pages_entry, update_pages_entry
 
 """
 When we are creating a view that is overloaded (IE, multiple HTTP methods on one endpoint), 
@@ -35,31 +36,51 @@ class HelloWorld(APIView):
         return Response({"message": "Hello, world!"}, status=200)
 
     @swagger_auto_schema(
-        operation_description="Posts a generic entry to pages_entry",
+        operation_description="Posts an entry to pages_entry",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=["key, value"],
+            properties={
+                "key": openapi.Schema(type=openapi.TYPE_STRING),
+                "value": openapi.Schema(type=openapi.TYPE_STRING),
+            },
+        ),
         responses={
-            201: "Hello, world!",
+            201: "Created",
         },
     )
     def post(self, request: Request):
-        impl.insert_pages_entry()
-        return Response({"message": "Hello, world!"}, status=201)
+        return impl.hello_world_post(request)
 
     @swagger_auto_schema(
         operation_description="Updates a generic entry in pages_entry",
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
-            required=["id"],
+            required=["key"],
             properties={
-                "id": openapi.Schema(type=openapi.TYPE_STRING),
+                "key": openapi.Schema(type=openapi.TYPE_STRING),
             },
         ),
         responses={
-            200: "Hello, world!",
+            200: "Entry updated",
+            404: "Entry does not exist",
         },
     )
     def put(self, request: Request):
-        if "id" not in request.data:
-            return Response({"message": "id parameter not found"}, status=400)
+        return impl.hello_world_put(request)
 
-        impl.update_pages_entry(request.data["id"])
-        return Response({"message": "Hello, world!"}, status=200)
+    @swagger_auto_schema(
+        operation_description="Deletes a generic entry in pages_entry",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=["key"],
+            properties={
+                "key": openapi.Schema(type=openapi.TYPE_STRING),
+            },
+        ),
+        responses={
+            200: "Entry deleted",
+        },
+    )
+    def delete(self, request: Request):
+        return impl.hello_world_delete(request)
