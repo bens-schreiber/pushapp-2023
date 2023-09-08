@@ -1,13 +1,14 @@
 from djongo import models
+from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
+from drf_yasg import openapi
 
-class Blog(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        abstract = True
 
 class Entry(models.Model):
-    blog = models.EmbeddedField(
-        model_container=Blog
-    )    
-    headline = models.CharField(max_length=255)    
+    key = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
+
+class EntrySerializer(ModelSerializer):
+    class Meta:
+        model = Entry
+        fields = "__all__"

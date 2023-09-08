@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from pages.views import hello_world
+from pages.views import HelloWorld
 
 app_info = openapi.Info(
     title="Pushapp API",
@@ -25,5 +25,6 @@ urlpatterns = [
         "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    path("hello-world", hello_world, name="hello_world"),
+    path("hello-world/", HelloWorld.as_view(), name="hello-world"),
+
 ]

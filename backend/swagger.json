@@ -1,15 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Snippets API",
-        "description": "Test description",
-        "termsOfService": "https://www.google.com/policies/terms/",
-        "contact": {
-            "email": "contact@snippets.local"
-        },
-        "license": {
-            "name": "BSD License"
-        },
+        "title": "Pushapp API",
         "version": "v1"
     },
     "basePath": "/",
@@ -30,14 +22,108 @@
         }
     ],
     "paths": {
-        "/hello-world": {
+        "/hello-world/": {
             "get": {
-                "operationId": "hello-world_list",
-                "description": "This is a brief description of what this endpoint does.\n---",
+                "operationId": "hello-world_read",
+                "description": "",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Success response description"
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Entry"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "post": {
+                "operationId": "hello-world_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "put": {
+                "operationId": "hello-world_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "patch": {
+                "operationId": "hello-world_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "delete": {
+                "operationId": "hello-world_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
                     }
                 },
                 "tags": [
@@ -47,5 +133,32 @@
             "parameters": []
         }
     },
-    "definitions": {}
+    "definitions": {
+        "Entry": {
+            "required": [
+                "key",
+                "value"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "key": {
+                    "title": "Key",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                }
+            }
+        }
+    }
 }
