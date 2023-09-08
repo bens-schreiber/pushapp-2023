@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+MONGO_USER: str = os.environ.get("MONGO_USER")
+MONGO_PASS: str = os.environ.get("MONGO_PASS")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
+    "pages",
 ]
 
 MIDDLEWARE = [
@@ -74,8 +79,28 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {}
-
+DATABASES = {
+    "default": {
+        "ENGINE": "djongo",
+        "NAME": "test",
+        "ENFORCE_SCHEMA": False,
+        "CLIENT": {
+            "host": "localhost",
+            "port": 27017,
+            "username": MONGO_USER,
+            "password": MONGO_PASS,
+        },
+        "LOGGING": {
+            "version": 1,
+            "loggers": {
+                "djongo": {
+                    "level": "DEBUG",
+                    "propagate": False,
+                }
+            },
+        },
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
