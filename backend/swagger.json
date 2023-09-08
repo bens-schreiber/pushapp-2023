@@ -1,85 +1,164 @@
 {
     "swagger": "2.0",
-    "info": {"title": "Pushapp API", "version": "v1"},
+    "info": {
+        "title": "Pushapp API",
+        "version": "v1"
+    },
     "basePath": "/",
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "securityDefinitions": {"Basic": {"type": "basic"}},
-    "security": [{"Basic": []}],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "Basic": []
+        }
+    ],
     "paths": {
         "/hello-world/": {
             "get": {
-                "operationId": "hello-world_list",
-                "description": "Returns a 'Hello World' string",
+                "operationId": "hello-world_read",
+                "description": "",
                 "parameters": [],
-                "responses": {"200": {"description": "Hello, world!"}},
-                "tags": ["hello-world"],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Entry"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
             },
             "post": {
                 "operationId": "hello-world_create",
-                "description": "Posts an entry to pages_entry",
+                "description": "",
                 "parameters": [
                     {
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "required": ["key, value"],
-                            "type": "object",
-                            "properties": {
-                                "key": {"type": "string"},
-                                "value": {"type": "string"},
-                            },
-                        },
+                            "$ref": "#/definitions/Entry"
+                        }
                     }
                 ],
-                "responses": {"201": {"description": "Created"}},
-                "tags": ["hello-world"],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
             },
             "put": {
                 "operationId": "hello-world_update",
-                "description": "Updates a generic entry in pages_entry",
+                "description": "",
                 "parameters": [
                     {
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "required": ["key"],
-                            "type": "object",
-                            "properties": {"key": {"type": "string"}},
-                        },
+                            "$ref": "#/definitions/Entry"
+                        }
                     }
                 ],
                 "responses": {
-                    "200": {"description": "Entry updated"},
-                    "404": {"description": "Entry does not exist"},
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
                 },
-                "tags": ["hello-world"],
+                "tags": [
+                    "hello-world"
+                ]
+            },
+            "patch": {
+                "operationId": "hello-world_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Entry"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello-world"
+                ]
             },
             "delete": {
                 "operationId": "hello-world_delete",
-                "description": "Deletes a generic entry in pages_entry",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "required": ["key"],
-                            "type": "object",
-                            "properties": {"key": {"type": "string"}},
-                        },
-                    }
-                ],
+                "description": "",
+                "parameters": [],
                 "responses": {
-                    "200": {"description": "Entry deleted"},
-                    "404": {"description": "Entry does not exist"},
+                    "204": {
+                        "description": ""
+                    }
                 },
-                "tags": ["hello-world"],
+                "tags": [
+                    "hello-world"
+                ]
             },
-            "parameters": [],
+            "parameters": []
         }
     },
-    "definitions": {},
+    "definitions": {
+        "Entry": {
+            "required": [
+                "key",
+                "value"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "key": {
+                    "title": "Key",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                }
+            }
+        }
+    }
 }
