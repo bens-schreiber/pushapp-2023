@@ -5,6 +5,8 @@ To run the backend:
 1. Set system environment vars
    * MONGO_USER = ...
    * MONGO_PASS = ...
+   * OAUTH_CLIENT = ... (google oauth client)
+   * OAUTH_SECRET = ... (google oauth secret)
 
 2. Start MongoDB and MongoExpress
    * `docker-compose up`
