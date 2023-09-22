@@ -1,0 +1,184 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Pushapp API",
+        "version": "v1"
+    },
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "Basic": []
+        }
+    ],
+    "paths": {
+        "/group/": {
+            "get": {
+                "operationId": "group_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "post": {
+                "operationId": "group_create",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "delete": {
+                "operationId": "group_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/group/user/": {
+            "post": {
+                "operationId": "group_user_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User id",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/hello_world/{id}/": {
+            "get": {
+                "operationId": "hello_world_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/KeyValue"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello_world"
+                ]
+            },
+            "put": {
+                "operationId": "hello_world_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/KeyValue"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/KeyValue"
+                        }
+                    }
+                },
+                "tags": [
+                    "hello_world"
+                ]
+            },
+            "delete": {
+                "operationId": "hello_world_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "hello_world"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this key value.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "KeyValue": {
+            "required": [
+                "key",
+                "value"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "key": {
+                    "title": "Key",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                },
+                "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 1
+                }
+            }
+        }
+    }
+}
