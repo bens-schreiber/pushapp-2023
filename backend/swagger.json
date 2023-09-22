@@ -25,7 +25,7 @@
         "/group/": {
             "get": {
                 "operationId": "group_list",
-                "description": "",
+                "description": "Get the group of the current user",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -38,7 +38,7 @@
             },
             "post": {
                 "operationId": "group_create",
-                "description": "",
+                "description": "Create a group for the current user, put the user into the group, and create a token for the group",
                 "parameters": [],
                 "responses": {
                     "201": {
@@ -51,7 +51,7 @@
             },
             "delete": {
                 "operationId": "group_delete",
-                "description": "",
+                "description": "Delete the group of the current user",
                 "parameters": [],
                 "responses": {
                     "204": {
@@ -67,18 +67,23 @@
         "/group/user/": {
             "post": {
                 "operationId": "group_user_create",
-                "description": "",
+                "description": "Add a user to the group of the current user",
                 "parameters": [
                     {
-                        "name": "user_id",
-                        "in": "query",
-                        "description": "User id",
-                        "type": "string"
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": ""
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
                     }
                 },
                 "tags": [
@@ -87,33 +92,30 @@
             },
             "parameters": []
         },
-        "/hello_world/{id}/": {
+        "/token/": {
             "get": {
-                "operationId": "hello_world_read",
+                "operationId": "token_list",
                 "description": "",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/KeyValue"
-                        }
+                        "description": ""
                     }
                 },
                 "tags": [
-                    "hello_world"
+                    "token"
                 ]
             },
-            "put": {
-                "operationId": "hello_world_update",
-                "description": "",
+            "patch": {
+                "operationId": "token_partial_update",
+                "description": "Update the tokens value by 1, and select a new token holder",
                 "parameters": [
                     {
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/KeyValue"
+                            "$ref": "#/definitions/Token"
                         }
                     }
                 ],
@@ -121,62 +123,56 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/KeyValue"
+                            "$ref": "#/definitions/Token"
                         }
                     }
                 },
                 "tags": [
-                    "hello_world"
+                    "token"
                 ]
             },
-            "delete": {
-                "operationId": "hello_world_delete",
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "204": {
-                        "description": ""
-                    }
-                },
-                "tags": [
-                    "hello_world"
-                ]
-            },
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "description": "A unique integer value identifying this key value.",
-                    "required": true,
-                    "type": "integer"
-                }
-            ]
+            "parameters": []
         }
     },
     "definitions": {
-        "KeyValue": {
+        "UserxGroup": {
             "required": [
-                "key",
-                "value"
+                "user_id"
+            ],
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "title": "User id",
+                    "type": "integer"
+                }
+            }
+        },
+        "Token": {
+            "required": [
+                "group",
+                "holder"
             ],
             "type": "object",
             "properties": {
                 "id": {
-                    "title": "ID",
+                    "title": "Id",
                     "type": "integer",
                     "readOnly": true
                 },
-                "key": {
-                    "title": "Key",
-                    "type": "string",
-                    "maxLength": 100,
-                    "minLength": 1
+                "score": {
+                    "title": "Score",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
                 },
-                "value": {
-                    "title": "Value",
+                "group": {
+                    "title": "Group",
                     "type": "string",
-                    "maxLength": 100,
-                    "minLength": 1
+                    "format": "uuid"
+                },
+                "holder": {
+                    "title": "Holder",
+                    "type": "integer"
                 }
             }
         }

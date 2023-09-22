@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "hello_world",
     "group",
+    "tokens",
 ]
 
 MIDDLEWARE = [

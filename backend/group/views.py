@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
+from django.shortcuts import get_object_or_404
+from tokens.models import Token
 
 
 class GroupView(APIView):
@@ -12,7 +14,7 @@ class GroupView(APIView):
     serializer_class = GroupSerializer
 
     @swagger_auto_schema(
-        operation_description="Create a group for the current user",
+        operation_description="Create a group for the current user, put the user into the group, and create a token for the group",
     )
     def post(self, request, format=None):
         if UserxGroup.objects.filter(user=request.user).exists():
@@ -21,12 +23,20 @@ class GroupView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        # create the group
         group = Group(leader=request.user)
         group.save()
+
+        # add user to group
         userxgroup = UserxGroup(user=request.user, group=group)
         userxgroup.save()
-        serializer = GroupSerializer(group)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        # create a token for the group
+        token = Token(group=group, holder=request.user)
+        token.save()
+
+        # return the group
+        return Response(GroupSerializer(group).data, status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(
         operation_description="Get the group of the current user",
@@ -40,12 +50,7 @@ class GroupView(APIView):
         operation_description="Delete the group of the current user",
     )
     def delete(self, request, format=None):
-        group = Group.objects.filter(leader=request.user).first()
-        if group is None:
-            return Response(
-                {"error": "User is not a leader of any group"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        group = get_object_or_404(Group, leader=request.user)
 
         userxgroup = UserxGroup.objects.filter(group=group)
         userxgroup.delete()
