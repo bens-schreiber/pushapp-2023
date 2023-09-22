@@ -2,7 +2,6 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from pages.views import HelloWorld
 from django.contrib import admin
 
 app_info = openapi.Info(
@@ -26,7 +25,6 @@ urlpatterns = [
         "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    path("hello-world/", HelloWorld.as_view(), name="hello-world"),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]

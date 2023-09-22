@@ -14,12 +14,11 @@ from pathlib import Path
 import os
 
 # environment variables
+POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
+POSTGRES_PASS: str = os.environ.get("POSTGRES_PASS")
 
-MONGO_USER: str = os.environ.get("MONGO_USER")
-MONGO_PASS: str = os.environ.get("MONGO_PASS")
-
-OAUTH_CLIENT = os.environ.get("OAUTH_CLIENT")
-OAUTH_SECRET = os.environ.get("OAUTH_SECRET")
+OAUTH_CLIENT: str = os.environ.get("OAUTH_CLIENT")
+OAUTH_SECRET: str = os.environ.get("OAUTH_SECRET")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,7 +50,6 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "pages",
 ]
 
 MIDDLEWARE = [
@@ -87,29 +85,16 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "djongo",
-        "NAME": "test",
-        "ENFORCE_SCHEMA": False,
-        "CLIENT": {
-            "host": "localhost",
-            "port": 27017,
-            "username": MONGO_USER,
-            "password": MONGO_PASS,
-        },
-        "LOGGING": {
-            "version": 1,
-            "loggers": {
-                "djongo": {
-                    "level": "DEBUG",
-                    "propagate": False,
-                }
-            },
-        },
-    }
+        "NAME": "auth_db",
+        "ENGINE": "django.db.backends.postgresql",
+        "USER": POSTGRES_USER,
+        "PASSWORD": POSTGRES_PASS,
+        "HOST": "localhost",
+        "PORT": "5432",
+    },
 }
 
 # Password validation
@@ -157,31 +142,40 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "django_project.urls.app_info",
+    "LOGIN_URL": "google_login",
+    "USE_SESSION_AUTH": True,
 }
 
 # Oauth2
 
-SITE_ID = 2
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
+
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by email
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-# Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
+        "EMAIL_AUTHENTICATION": True,
         "APP": {
             "client_id": OAUTH_CLIENT,
             "secret": OAUTH_SECRET,
             "key": "",
-        }
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
     }
 }
