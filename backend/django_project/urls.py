@@ -3,6 +3,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.contrib import admin
+from hello_world.views import KeyValueViewSet
 
 app_info = openapi.Info(
     title="Pushapp API",
@@ -27,4 +28,5 @@ urlpatterns = [
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('hello_world/', KeyValueViewSet.as_view({'get': 'list', 'post': 'create'})),
 ]
