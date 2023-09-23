@@ -13,8 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
-MONGO_USER: str = os.environ.get("MONGO_USER")
-MONGO_PASS: str = os.environ.get("MONGO_PASS")
+# environment variables
+POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
+POSTGRES_PASS: str = os.environ.get("POSTGRES_PASS")
+
+OAUTH_CLIENT: str = os.environ.get("OAUTH_CLIENT")
+OAUTH_SECRET: str = os.environ.get("OAUTH_SECRET")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +46,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
-    "pages",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "group",
+    "tokens",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -77,29 +87,16 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "djongo",
-        "NAME": "test",
-        "ENFORCE_SCHEMA": False,
-        "CLIENT": {
-            "host": "localhost",
-            "port": 27017,
-            "username": MONGO_USER,
-            "password": MONGO_PASS,
-        },
-        "LOGGING": {
-            "version": 1,
-            "loggers": {
-                "djongo": {
-                    "level": "DEBUG",
-                    "propagate": False,
-                }
-            },
-        },
-    }
+        "NAME": "db",
+        "ENGINE": "django.db.backends.postgresql",
+        "USER": POSTGRES_USER,
+        "PASSWORD": POSTGRES_PASS,
+        "HOST": "localhost",
+        "PORT": "5432",
+    },
 }
 
 # Password validation
@@ -143,6 +140,44 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Swagger
+
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "django_project.urls.app_info",
+    "LOGIN_URL": "google_login",
+    "USE_SESSION_AUTH": True,
+}
+
+# Oauth2
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "EMAIL_AUTHENTICATION": True,
+        "APP": {
+            "client_id": OAUTH_CLIENT,
+            "secret": OAUTH_SECRET,
+            "key": "",
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
 }

@@ -22,104 +22,36 @@
         }
     ],
     "paths": {
-        "/hello-world/": {
+        "/group/": {
             "get": {
-                "operationId": "hello-world_read",
-                "description": "",
+                "operationId": "group_list",
+                "description": "Get the group of the current user",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Entry"
-                            }
-                        }
+                        "description": ""
                     }
                 },
                 "tags": [
-                    "hello-world"
+                    "group"
                 ]
             },
             "post": {
-                "operationId": "hello-world_create",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
-                    }
-                ],
+                "operationId": "group_create",
+                "description": "Create a group for the current user, put the user into the group, and create a token for the group",
+                "parameters": [],
                 "responses": {
                     "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
+                        "description": ""
                     }
                 },
                 "tags": [
-                    "hello-world"
-                ]
-            },
-            "put": {
-                "operationId": "hello-world_update",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
-                    }
-                },
-                "tags": [
-                    "hello-world"
-                ]
-            },
-            "patch": {
-                "operationId": "hello-world_partial_update",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/Entry"
-                        }
-                    }
-                },
-                "tags": [
-                    "hello-world"
+                    "group"
                 ]
             },
             "delete": {
-                "operationId": "hello-world_delete",
-                "description": "",
+                "operationId": "group_delete",
+                "description": "Delete the group of the current user",
                 "parameters": [],
                 "responses": {
                     "204": {
@@ -127,36 +59,120 @@
                     }
                 },
                 "tags": [
-                    "hello-world"
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/group/user/": {
+            "post": {
+                "operationId": "group_user_create",
+                "description": "Add a user to the group of the current user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/token/": {
+            "get": {
+                "operationId": "token_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "token"
+                ]
+            },
+            "patch": {
+                "operationId": "token_partial_update",
+                "description": "Update the tokens value by 1, and select a new token holder",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    }
+                },
+                "tags": [
+                    "token"
                 ]
             },
             "parameters": []
         }
     },
     "definitions": {
-        "Entry": {
+        "UserxGroup": {
             "required": [
-                "key",
-                "value"
+                "user_id"
+            ],
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "title": "User id",
+                    "type": "integer"
+                }
+            }
+        },
+        "Token": {
+            "required": [
+                "group",
+                "holder"
             ],
             "type": "object",
             "properties": {
                 "id": {
-                    "title": "ID",
+                    "title": "Id",
                     "type": "integer",
                     "readOnly": true
                 },
-                "key": {
-                    "title": "Key",
-                    "type": "string",
-                    "maxLength": 100,
-                    "minLength": 1
+                "score": {
+                    "title": "Score",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
                 },
-                "value": {
-                    "title": "Value",
+                "group": {
+                    "title": "Group",
                     "type": "string",
-                    "maxLength": 100,
-                    "minLength": 1
+                    "format": "uuid"
+                },
+                "holder": {
+                    "title": "Holder",
+                    "type": "integer"
                 }
             }
         }
