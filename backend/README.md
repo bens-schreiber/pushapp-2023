@@ -14,6 +14,9 @@ To run the backend:
    * `source ./env/bin/activate` OR `.\env\Scripts\Activate.ps1`
    * `pip install -r requirements.txt`
 
+2. Run the database
+   * `docker-compose up`
+
 3. Run the server
    * `python manage.py migrate`
    * `python manage.py runserver`
