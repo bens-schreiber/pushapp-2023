@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **groupCreate**
-> groupCreate()
+> Group groupCreate()
 
 
 
@@ -25,15 +25,15 @@ Create a group for the current user, put the user into the group, and create a t
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = GroupApi();
+final api = Openapi().getGroupApi();
 
 try {
-    api_instance.groupCreate();
-} catch (e) {
+    final response = api.groupCreate();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling GroupApi->groupCreate: $e\n');
 }
 ```
@@ -43,16 +43,16 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**Group**](Group.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -66,15 +66,14 @@ Delete the group of the current user
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = GroupApi();
+final api = Openapi().getGroupApi();
 
 try {
-    api_instance.groupDelete();
-} catch (e) {
+    api.groupDelete();
+} catch on DioError (e) {
     print('Exception when calling GroupApi->groupDelete: $e\n');
 }
 ```
@@ -88,7 +87,7 @@ void (empty response body)
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 
@@ -98,7 +97,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groupList**
-> groupList()
+> BuiltList<Group> groupList()
 
 
 
@@ -107,15 +106,15 @@ Get the group of the current user
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = GroupApi();
+final api = Openapi().getGroupApi();
 
 try {
-    api_instance.groupList();
-} catch (e) {
+    final response = api.groupList();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling GroupApi->groupList: $e\n');
 }
 ```
@@ -125,16 +124,16 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**BuiltList&lt;Group&gt;**](Group.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -148,17 +147,16 @@ Add a user to the group of the current user
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = GroupApi();
-final data = UserxGroup(); // UserxGroup | 
+final api = Openapi().getGroupApi();
+final UserxGroup data = ; // UserxGroup | 
 
 try {
-    final result = api_instance.groupUserCreate(data);
-    print(result);
-} catch (e) {
+    final response = api.groupUserCreate(data);
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling GroupApi->groupUserCreate: $e\n');
 }
 ```
@@ -175,7 +173,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 

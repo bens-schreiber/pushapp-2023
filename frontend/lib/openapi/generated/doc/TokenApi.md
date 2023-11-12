@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **tokenList**
-> tokenList()
+> BuiltList<Token> tokenList()
 
 
 
@@ -23,15 +23,15 @@ Get all tokens of the current user
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = TokenApi();
+final api = Openapi().getTokenApi();
 
 try {
-    api_instance.tokenList();
-} catch (e) {
+    final response = api.tokenList();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling TokenApi->tokenList: $e\n');
 }
 ```
@@ -41,21 +41,21 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**BuiltList&lt;Token&gt;**](Token.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tokenPartialUpdate**
-> tokenPartialUpdate()
+> BuiltList<Token> tokenPartialUpdate()
 
 
 
@@ -64,15 +64,15 @@ Update the tokens value by 1, and select a new token holder
 ### Example
 ```dart
 import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: Basic
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
+// TODO Configure OAuth2 access token for authorization: Your App API - Swagger
+//defaultApiClient.getAuthentication<OAuth>('Your App API - Swagger').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api_instance = TokenApi();
+final api = Openapi().getTokenApi();
 
 try {
-    api_instance.tokenPartialUpdate();
-} catch (e) {
+    final response = api.tokenPartialUpdate();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling TokenApi->tokenPartialUpdate: $e\n');
 }
 ```
@@ -82,16 +82,16 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**BuiltList&lt;Token&gt;**](Token.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic)
+[Your App API - Swagger](../README.md#Your App API - Swagger)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

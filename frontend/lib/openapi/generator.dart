@@ -4,7 +4,7 @@ import 'package:openapi_generator_annotations/openapi_generator_annotations.dart
     overwriteExistingFiles: true,
     alwaysRun: true,
     inputSpecFile: '../backend/swagger.json',
-    generatorName: Generator.dart,
+    generatorName: Generator.dio,
     outputDirectory: 'lib/openapi/generated')
 
 /* 
@@ -15,5 +15,5 @@ import 'package:openapi_generator_annotations/openapi_generator_annotations.dart
   https://pub.dev/packages/openapi_generator
 */
 
-// HASH: 6T62e13oQB0FHZYynjh1UPPpcENJSL38
+// HASH: H8wyKVzJocCl7Lgq5BAh0jiSd5HTtBi8
 class Example extends OpenapiGeneratorConfig {}

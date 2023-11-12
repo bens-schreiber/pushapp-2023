@@ -6,8 +6,9 @@ final _googleSignIn = GoogleSignIn(
     clientId: googleIOSOAuthClientId,
     serverClientId: googleOAuthServerClientId);
 
-class ApiHelper {
+abstract class ApiHelper {
   static Future<void> login() async {
-    await _googleSignIn.signIn();
+    final googleUser = await _googleSignIn.signIn();
+    final authHeaders = (await googleUser!.authHeaders)["Authorization"]!;
   }
 }
