@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "user",
     "drf_yasg",
     "allauth",
     "allauth.account",
@@ -144,8 +145,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "django_project.urls.app_info",
-    "LOGIN_URL": "google_login",
     "USE_SESSION_AUTH": True,
+    "SECURITY_DEFINITIONS": {
+        "Your App API - Swagger": {
+            "type": "oauth2",
+            "authorizationUrl": "accounts/google/login",
+            "tokenUrl": "accounts/google/login/callback",
+            "flow": "accessCode",
+        }
+    },
+    "OAUTH2_REDIRECT_URL": "accounts/google/login/callback",
+    "OAUTH2_CONFIG": {
+        "clientId": OAUTH_CLIENT,
+        "clientSecret": OAUTH_SECRET,
+        "appName": "PushApp",
+    },
 }
 
 # Oauth2

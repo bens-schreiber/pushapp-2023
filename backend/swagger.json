@@ -12,13 +12,16 @@
         "application/json"
     ],
     "securityDefinitions": {
-        "Basic": {
-            "type": "basic"
+        "Your App API - Swagger": {
+            "type": "oauth2",
+            "authorizationUrl": "accounts/google/login",
+            "tokenUrl": "accounts/google/login/callback",
+            "flow": "accessCode"
         }
     },
     "security": [
         {
-            "Basic": []
+            "Your App API - Swagger": []
         }
     ],
     "paths": {
@@ -29,7 +32,13 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Group"
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -41,8 +50,11 @@
                 "description": "Create a group for the current user, put the user into the group, and create a token for the group",
                 "parameters": [],
                 "responses": {
-                    "201": {
-                        "description": ""
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
                     }
                 },
                 "tags": [
@@ -79,7 +91,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "",
                         "schema": {
                             "$ref": "#/definitions/UserxGroup"
@@ -99,7 +111,13 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Token"
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -112,7 +130,13 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Token"
+                            }
+                        }
                     }
                 },
                 "tags": [
@@ -123,6 +147,24 @@
         }
     },
     "definitions": {
+        "Group": {
+            "required": [
+                "leader"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "string",
+                    "format": "uuid",
+                    "readOnly": true
+                },
+                "leader": {
+                    "title": "Leader",
+                    "type": "integer"
+                }
+            }
+        },
         "UserxGroup": {
             "required": [
                 "user_id"
@@ -131,6 +173,35 @@
             "properties": {
                 "user_id": {
                     "title": "User id",
+                    "type": "integer"
+                }
+            }
+        },
+        "Token": {
+            "required": [
+                "group",
+                "holder"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "score": {
+                    "title": "Score",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "group": {
+                    "title": "Group",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "holder": {
+                    "title": "Holder",
                     "type": "integer"
                 }
             }

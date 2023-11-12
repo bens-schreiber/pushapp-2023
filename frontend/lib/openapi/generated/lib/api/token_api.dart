@@ -16,7 +16,9 @@ class TokenApi {
 
   final ApiClient apiClient;
 
-  /// Performs an HTTP 'GET /token/' operation and returns the [Response].
+  /// Get all tokens of the current user
+  ///
+  /// Note: This method returns the HTTP [Response].
   Future<Response> tokenListWithHttpInfo() async {
     // ignore: prefer_const_declarations
     final path = r'/token/';
@@ -42,6 +44,7 @@ class TokenApi {
     );
   }
 
+  /// Get all tokens of the current user
   Future<void> tokenList() async {
     final response = await tokenListWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
@@ -52,22 +55,18 @@ class TokenApi {
   /// Update the tokens value by 1, and select a new token holder
   ///
   /// Note: This method returns the HTTP [Response].
-  ///
-  /// Parameters:
-  ///
-  /// * [Token] data (required):
-  Future<Response> tokenPartialUpdateWithHttpInfo(Token data,) async {
+  Future<Response> tokenPartialUpdateWithHttpInfo() async {
     // ignore: prefer_const_declarations
     final path = r'/token/';
 
     // ignore: prefer_final_locals
-    Object? postBody = data;
+    Object? postBody;
 
     final queryParams = <QueryParam>[];
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>['application/json'];
+    const contentTypes = <String>[];
 
 
     return apiClient.invokeAPI(
@@ -82,22 +81,10 @@ class TokenApi {
   }
 
   /// Update the tokens value by 1, and select a new token holder
-  ///
-  /// Parameters:
-  ///
-  /// * [Token] data (required):
-  Future<Token?> tokenPartialUpdate(Token data,) async {
-    final response = await tokenPartialUpdateWithHttpInfo(data,);
+  Future<void> tokenPartialUpdate() async {
+    final response = await tokenPartialUpdateWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
-    // When a remote server returns no body with a status of 204, we shall not decode it.
-    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
-    // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Token',) as Token;
-    
-    }
-    return null;
   }
 }

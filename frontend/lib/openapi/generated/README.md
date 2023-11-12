@@ -69,7 +69,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [Token](doc//Token.md)
  - [UserxGroup](doc//UserxGroup.md)
 
 

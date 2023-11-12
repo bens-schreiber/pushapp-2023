@@ -5,6 +5,7 @@ from drf_yasg import openapi
 from django.contrib import admin
 from group.views import GroupView, UserxGroupView
 from tokens.views import TokenViewSet
+from user.views import UserView
 
 app_info = openapi.Info(
     title="Pushapp API",
@@ -32,5 +33,6 @@ urlpatterns = [
     path('token/', TokenViewSet.as_view()),
     path('group/', GroupView.as_view()),
     path('group/user/', UserxGroupView.as_view()),
+    path('user/', UserView.as_view()),
 
 ]

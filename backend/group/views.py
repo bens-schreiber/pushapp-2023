@@ -14,6 +14,7 @@ class GroupView(APIView):
     serializer_class = GroupSerializer
 
     @swagger_auto_schema(
+        responses={200: GroupSerializer()},
         operation_description="Create a group for the current user, put the user into the group, and create a token for the group",
     )
     def post(self, request, format=None):
@@ -39,6 +40,7 @@ class GroupView(APIView):
         return Response(GroupSerializer(group).data, status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(
+        responses={200: GroupSerializer(many=True)},
         operation_description="Get the group of the current user",
     )
     def get(self, request, format=None):
@@ -66,6 +68,7 @@ class UserxGroupView(APIView):
     @swagger_auto_schema(
         operation_description="Add a user to the group of the current user",
         request_body=UserxGroupSerializer,
+        responses={200: UserxGroupSerializer},
     )
     def post(self, request, format=None):
         serializer = UserxGroupSerializer(

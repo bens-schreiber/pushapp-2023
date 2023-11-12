@@ -30,8 +30,8 @@ part 'auth/http_bearer_auth.dart';
 part 'api/group_api.dart';
 part 'api/token_api.dart';
 
-part 'model/token.dart';
 part 'model/userx_group.dart';
+
 
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';

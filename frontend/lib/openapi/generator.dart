@@ -15,5 +15,5 @@ import 'package:openapi_generator_annotations/openapi_generator_annotations.dart
   https://pub.dev/packages/openapi_generator
 */
 
-// HASH: j17Fs6smpxj9ZLs5S7tGmJePrm3B20pK
+// HASH: 6T62e13oQB0FHZYynjh1UPPpcENJSL38
 class Example extends OpenapiGeneratorConfig {}

@@ -17,6 +17,8 @@ void main() {
   // final instance = TokenApi();
 
   group('tests for TokenApi', () {
+    // Get all tokens of the current user
+    //
     //Future tokenList() async
     test('test tokenList', () async {
       // TODO
@@ -24,7 +26,7 @@ void main() {
 
     // Update the tokens value by 1, and select a new token holder
     //
-    //Future<Token> tokenPartialUpdate(Token data) async
+    //Future tokenPartialUpdate() async
     test('test tokenPartialUpdate', () async {
       // TODO
     });

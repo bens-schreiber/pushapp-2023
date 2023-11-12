@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 
 
+Get all tokens of the current user
+
 ### Example
 ```dart
 import 'package:openapi/api.dart';
@@ -53,7 +55,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tokenPartialUpdate**
-> Token tokenPartialUpdate(data)
+> tokenPartialUpdate()
 
 
 
@@ -67,25 +69,20 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<HttpBasicAuth>('Basic').password = 'YOUR_PASSWORD';
 
 final api_instance = TokenApi();
-final data = Token(); // Token | 
 
 try {
-    final result = api_instance.tokenPartialUpdate(data);
-    print(result);
+    api_instance.tokenPartialUpdate();
 } catch (e) {
     print('Exception when calling TokenApi->tokenPartialUpdate: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**Token**](Token.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**Token**](Token.md)
+void (empty response body)
 
 ### Authorization
 
@@ -93,8 +90,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

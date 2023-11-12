@@ -1,9 +1,9 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 analysis_options.yaml
 doc/GroupApi.md
-doc/Token.md
 doc/TokenApi.md
 doc/UserxGroup.md
 git_push.sh
@@ -18,6 +18,8 @@ lib/auth/authentication.dart
 lib/auth/http_basic_auth.dart
 lib/auth/http_bearer_auth.dart
 lib/auth/oauth.dart
-lib/model/token.dart
 lib/model/userx_group.dart
 pubspec.yaml
+test/group_api_test.dart
+test/token_api_test.dart
+test/userx_group_test.dart
