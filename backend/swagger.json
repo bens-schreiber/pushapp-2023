@@ -95,7 +95,7 @@
         "/token/": {
             "get": {
                 "operationId": "token_list",
-                "description": "",
+                "description": "Get all tokens of the current user",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -109,22 +109,10 @@
             "patch": {
                 "operationId": "token_partial_update",
                 "description": "Update the tokens value by 1, and select a new token holder",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Token"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/Token"
-                        }
+                        "description": ""
                     }
                 },
                 "tags": [
@@ -143,35 +131,6 @@
             "properties": {
                 "user_id": {
                     "title": "User id",
-                    "type": "integer"
-                }
-            }
-        },
-        "Token": {
-            "required": [
-                "group",
-                "holder"
-            ],
-            "type": "object",
-            "properties": {
-                "id": {
-                    "title": "Id",
-                    "type": "integer",
-                    "readOnly": true
-                },
-                "score": {
-                    "title": "Score",
-                    "type": "integer",
-                    "maximum": 2147483647,
-                    "minimum": -2147483648
-                },
-                "group": {
-                    "title": "Group",
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "holder": {
-                    "title": "Holder",
                     "type": "integer"
                 }
             }

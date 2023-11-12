@@ -1,6 +1,7 @@
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
 
 @Openapi(
+    overwriteExistingFiles: true,
     alwaysRun: true,
     inputSpecFile: '../backend/swagger.json',
     generatorName: Generator.dart,
