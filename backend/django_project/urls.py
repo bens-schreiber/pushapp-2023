@@ -5,7 +5,7 @@ from drf_yasg import openapi
 from django.contrib import admin
 from group.views import GroupView, UserxGroupView
 from tokens.views import TokenViewSet
-from user.views import UserView
+from user.views import UserView, GoogleLogin
 
 app_info = openapi.Info(
     title="Pushapp API",
@@ -29,6 +29,7 @@ urlpatterns = [
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path('accounts/', include('allauth.urls')),
+    path('rest-auth/google', GoogleLogin.as_view(), name='google_login'),
     path('admin/', admin.site.urls),
     path('token/', TokenViewSet.as_view()),
     path('group/', GroupView.as_view()),

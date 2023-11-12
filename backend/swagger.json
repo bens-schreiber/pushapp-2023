@@ -12,16 +12,16 @@
         "application/json"
     ],
     "securityDefinitions": {
-        "Your App API - Swagger": {
+        "Google Authentication": {
             "type": "oauth2",
             "authorizationUrl": "accounts/google/login",
-            "tokenUrl": "accounts/google/login/callback",
+            "tokenUrl": "rest-auth/google",
             "flow": "accessCode"
         }
     },
     "security": [
         {
-            "Your App API - Swagger": []
+            "Google Authentication": []
         }
     ],
     "paths": {
@@ -100,6 +100,34 @@
                 },
                 "tags": [
                     "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/rest-auth/google": {
+            "post": {
+                "operationId": "rest-auth_google_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SocialLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/SocialLogin"
+                        }
+                    }
+                },
+                "tags": [
+                    "rest-auth"
                 ]
             },
             "parameters": []
@@ -193,6 +221,19 @@
                 "user_id": {
                     "title": "User id",
                     "type": "integer"
+                }
+            }
+        },
+        "SocialLogin": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "title": "Access token",
+                    "type": "string"
+                },
+                "code": {
+                    "title": "Code",
+                    "type": "string"
                 }
             }
         },

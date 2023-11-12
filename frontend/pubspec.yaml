@@ -22,17 +22,22 @@ dependencies:
   go_router: ^12.1.1
 
   # Swagger generator
+  openapi:
+    path: ./openapi/generated
+  dio: ^5.0.0
   openapi_generator: ^4.13.1
   openapi_generator_annotations: ^4.11.0
 
   # Google login
   google_sign_in: ^6.1.6
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  build_runner: ^2.1.5
 
 
 flutter:

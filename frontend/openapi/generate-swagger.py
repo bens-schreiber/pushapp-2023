@@ -1,8 +1,7 @@
 import random
-import fileinput
 import subprocess
 
-file_path = "./lib/openapi/generator.dart"
+file_path = "./openapi/generator.dart"
 
 random_hash = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=32))
 new_content = "// HASH: " + random_hash
@@ -22,7 +21,7 @@ with open(file_path, 'w') as file:
     file.writelines(file_content)
 
 # Generate swagger command (https://pub.dev/packages/openapi_generator)
-dart_command = "dart run build_runner build --delete-conflicting-outputs"
+dart_command = "dart run build_runner build --delete-conflicting-outputs -v"
 subprocess.run(dart_command, shell=True)
 
 

@@ -45,14 +45,26 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "user",
-    "drf_yasg",
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+    "django.contrib.sites",
+
     "allauth",
     "allauth.account",
+
+    "rest_auth.registration",
+
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+
+    "drf_yasg",
+
     "group",
     "tokens",
+    "user"
 ]
 
 MIDDLEWARE = [
@@ -63,7 +75,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -145,12 +156,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "django_project.urls.app_info",
-    "USE_SESSION_AUTH": True,
+    "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
-        "Your App API - Swagger": {
+        "Google Authentication": {
             "type": "oauth2",
             "authorizationUrl": "accounts/google/login",
-            "tokenUrl": "accounts/google/login/callback",
+            "tokenUrl": "rest-auth/google",
             "flow": "accessCode",
         }
     },
