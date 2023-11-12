@@ -22,6 +22,7 @@ dependencies:
 
   # Swagger generator
   openapi_generator: ^4.13.1
+  openapi_generator_annotations: ^4.11.0
 
 dev_dependencies:
   flutter_test:
