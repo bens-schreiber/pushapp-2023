@@ -19,14 +19,6 @@ class MenuButton extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
-            height: 40.0, 
-            width: 40.0, 
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
           ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
