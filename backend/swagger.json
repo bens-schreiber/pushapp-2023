@@ -12,19 +12,46 @@
         "application/json"
     ],
     "securityDefinitions": {
-        "Google Authentication": {
-            "type": "oauth2",
-            "authorizationUrl": "accounts/google/login",
-            "tokenUrl": "rest-auth/google",
-            "flow": "accessCode"
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     },
     "security": [
         {
-            "Google Authentication": []
+            "Bearer": []
         }
     ],
     "paths": {
+        "/google/": {
+            "post": {
+                "operationId": "google_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GoogleView"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/GoogleView"
+                        }
+                    }
+                },
+                "tags": [
+                    "google"
+                ]
+            },
+            "parameters": []
+        },
         "/group/": {
             "get": {
                 "operationId": "group_list",
@@ -104,34 +131,6 @@
             },
             "parameters": []
         },
-        "/rest-auth/google": {
-            "post": {
-                "operationId": "rest-auth_google_create",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SocialLogin"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/SocialLogin"
-                        }
-                    }
-                },
-                "tags": [
-                    "rest-auth"
-                ]
-            },
-            "parameters": []
-        },
         "/token/": {
             "get": {
                 "operationId": "token_list",
@@ -194,6 +193,20 @@
         }
     },
     "definitions": {
+        "GoogleView": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                }
+            }
+        },
         "Group": {
             "required": [
                 "leader"
@@ -221,19 +234,6 @@
                 "user_id": {
                     "title": "User id",
                     "type": "integer"
-                }
-            }
-        },
-        "SocialLogin": {
-            "type": "object",
-            "properties": {
-                "access_token": {
-                    "title": "Access token",
-                    "type": "string"
-                },
-                "code": {
-                    "title": "Code",
-                    "type": "string"
                 }
             }
         },

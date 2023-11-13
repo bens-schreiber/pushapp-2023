@@ -13,12 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from django_project.swagger import SWAGGER_APP_INFO
+
 # environment variables
 POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
 POSTGRES_PASS: str = os.environ.get("POSTGRES_PASS")
-
-OAUTH_CLIENT: str = os.environ.get("OAUTH_CLIENT")
-OAUTH_SECRET: str = os.environ.get("OAUTH_SECRET")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,26 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-
     "django.contrib.sites",
-
-    "allauth",
-    "allauth.account",
-
-    "rest_auth.registration",
-
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-
     "drf_yasg",
-
     "group",
     "tokens",
-    "user"
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -155,54 +139,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Swagger
 
 SWAGGER_SETTINGS = {
-    "DEFAULT_INFO": "django_project.urls.app_info",
+    "DEFAULT_INFO": SWAGGER_APP_INFO,
     "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
-        "Google Authentication": {
-            "type": "oauth2",
-            "authorizationUrl": "accounts/google/login",
-            "tokenUrl": "rest-auth/google",
-            "flow": "accessCode",
-        }
-    },
-    "OAUTH2_REDIRECT_URL": "accounts/google/login/callback",
-    "OAUTH2_CONFIG": {
-        "clientId": OAUTH_CLIENT,
-        "clientSecret": OAUTH_SECRET,
-        "appName": "PushApp",
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
     },
 }
 
-# Oauth2
-
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
-
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
-
-SOCIALACCOUNT_LOGIN_ON_GET = True
-ACCOUNT_LOGOUT_ON_GET = True
-
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "EMAIL_AUTHENTICATION": True,
-        "APP": {
-            "client_id": OAUTH_CLIENT,
-            "secret": OAUTH_SECRET,
-            "key": "",
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-    }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
 }

@@ -5,8 +5,6 @@ To run the backend:
 1. Set system environment vars
    * POSTGRES_USER = ...
    * POSTGRES_PASS = ...
-   * OAUTH_CLIENT = ... (google oauth client)
-   * OAUTH_SECRET = ... (google oauth secret)
 
 2. (in a seperate terminal) Create the virtual environment
    * `cd backend`
@@ -20,6 +18,13 @@ To run the backend:
 3. Run the server
    * `python manage.py migrate`
    * `python manage.py runserver`
+
+4. Make queries
+   * To get a token, use https://developers.google.com/oauthplayground/
+   * Click exchange authorization code for tokens
+   * Copy the access token
+   * In swagger, use the previous token in the /google route to get the app JWT token
+   * Authorize by the swagger button and enter: Bearer your-access-token
 
 ## Running after initial setup
 
