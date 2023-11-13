@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
 
-
 class MenuButton extends StatelessWidget {
-  const MenuButton({Key? key});
+  const MenuButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        onVerticalDragUpdate: (details) {
-          if (details.primaryDelta! < -10) {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Menu();
-              },
-            );
-          }
-        },
-        child: Center(
-          child: Dismissible(
-            key: const Key('dismiss'),
-            onDismissed: (direction) {
-              if (direction == DismissDirection.down) {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Menu();
-                  },
-                );
-              }
+    return GestureDetector(
+      onVerticalDragUpdate: (details) {
+        if (details.primaryDelta! < -10) {
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return const Menu();
             },
-            child: ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Menu();
-                  },
-                );
-              },
-              child: const Text("^^^"),
-            ),
+          );
+        }
+      },
+      child: Center(
+        child: Dismissible(
+          key: const Key('dismiss'),
+          onDismissed: (direction) {
+            if (direction == DismissDirection.down) {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return const Menu();
+                },
+              );
+            }
+          },
+          child: ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return const Menu();
+                },
+              );
+            },
+            child: const Text("^^^"),
           ),
         ),
       ),
@@ -49,9 +46,8 @@ class MenuButton extends StatelessWidget {
   }
 }
 
-
 class Menu extends StatelessWidget {
-  const Menu({Key? key});
+  const Menu({super.key});
 
   @override
   Widget build(BuildContext context) {

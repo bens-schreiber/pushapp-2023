@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/homeitems/slidingmenu/slideingmenu.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key});
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(bottomSheet: MenuButton())
+    return const Scaffold(bottomSheet: MenuButton());
+  }
+}
