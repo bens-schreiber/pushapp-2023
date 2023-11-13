@@ -1,19 +1,54 @@
 import 'package:flutter/material.dart';
 
-class MenuBar extends StatelessWidget {
-  const MenuBar({super.key});
+
+class MenuButton extends StatelessWidget {
+  const MenuButton({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      builder: (context, ScrollController scrollController) =>
-          SingleChildScrollView(
-        controller: scrollController,
-        child: Menu(),
+    return Container(
+      child: GestureDetector(
+        onVerticalDragUpdate: (details) {
+          if (details.primaryDelta! < -10) {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Menu();
+              },
+            );
+          }
+        },
+        child: Center(
+          child: Dismissible(
+            key: const Key('dismiss'),
+            onDismissed: (direction) {
+              if (direction == DismissDirection.down) {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Menu();
+                  },
+                );
+              }
+            },
+            child: ElevatedButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Menu();
+                  },
+                );
+              },
+              child: const Text("^^^"),
+            ),
+          ),
+        ),
       ),
     );
   }
 }
+
 
 class Menu extends StatelessWidget {
   const Menu({Key? key});
