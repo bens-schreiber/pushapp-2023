@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatelessWidget {
-  const MenuButton({super.key});
+  const MenuButton({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +16,18 @@ class MenuButton extends StatelessWidget {
           );
         }
       },
-      child: Center(
-        child: Dismissible(
-          key: const Key('dismiss'),
-          onDismissed: (direction) {
-            if (direction == DismissDirection.down) {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return const Menu();
-                },
-              );
-            }
-          },
-          child: ElevatedButton(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: 40.0, 
+            width: 40.0, 
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -38,9 +36,17 @@ class MenuButton extends StatelessWidget {
                 },
               );
             },
-            child: const Text("^^^"),
+            child: Container(
+              height: 20.0,
+              width: 500.0,
+              child: const Divider(
+                color: Colors.black,
+                thickness: 2.0,
+                height: 1.0,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
