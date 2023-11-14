@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
-from django_project.swagger import SWAGGER_APP_INFO
-
 # environment variables
 POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
 POSTGRES_PASS: str = os.environ.get("POSTGRES_PASS")
@@ -140,7 +138,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Swagger
 
 SWAGGER_SETTINGS = {
-    "DEFAULT_INFO": SWAGGER_APP_INFO,
     "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
         "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
