@@ -9,4 +9,4 @@ Uses the Feature-First layout model:
 
 To generate swagger:
 - NOTE: VSCode sometimes screws this up. If you get an OS Error: No such file..., then close VSCode and run in terminal
-* Run `python openapi/generate-swagger.py`
+* Run `python generate-swagger.py`

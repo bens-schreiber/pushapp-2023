@@ -23,7 +23,9 @@ class UserView(APIView):
 
 
 class GoogleView(APIView):
-    @swagger_auto_schema(request_body=GoogleViewSerializer)
+    @swagger_auto_schema(
+        request_body=GoogleViewSerializer, responses={200: UserTokenSerializer()}
+    )
     def post(self, request):
         data = validate_token(request.data.get("token"))
 

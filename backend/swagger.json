@@ -39,10 +39,10 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/GoogleView"
+                            "$ref": "#/definitions/UserToken"
                         }
                     }
                 },
@@ -203,6 +203,34 @@
                     "title": "Token",
                     "type": "string",
                     "maxLength": 500,
+                    "minLength": 1
+                }
+            }
+        },
+        "UserToken": {
+            "required": [
+                "username",
+                "access_token",
+                "refresh_token"
+            ],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "access_token": {
+                    "title": "Access token",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "refresh_token": {
+                    "title": "Refresh token",
+                    "type": "string",
+                    "maxLength": 255,
                     "minLength": 1
                 }
             }

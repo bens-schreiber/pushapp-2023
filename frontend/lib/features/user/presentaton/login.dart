@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pushapp/features/user/application/api_helper.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -9,7 +10,7 @@ class LoginPage extends StatelessWidget {
       body: Center(
           child: TextButton(
               onPressed: () async {
-                // await ApiHelper.login();
+                await ApiHelper.login();
               },
               child: const Text("Login"))),
     );

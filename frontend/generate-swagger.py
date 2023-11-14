@@ -1,7 +1,7 @@
 import random
 import subprocess
 
-file_path = "./openapi/generator.dart"
+file_path = "./lib/swag.dart"
 
 random_hash = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=32))
 new_content = "// HASH: " + random_hash

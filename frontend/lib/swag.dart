@@ -14,5 +14,6 @@ import 'package:openapi_generator_annotations/openapi_generator_annotations.dart
   update to the latest swagger doc. The following line is a random hash to act
   as the file edit, and should be automated via the generate-swagger.ps1 file. 
 */
-// HASH: RVGP55v9C2RUVN414WDd6WZSXan8XBry
-class Example extends OpenapiGeneratorConfig {}
+// HASH: W0JNeVaGDtmc1844fHT2RFfEg2vifDG5
+// ignore: deprecated_member_use
+class SwaggerGenerator extends OpenapiGeneratorConfig {}
