@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'bottomsheetmenu.dart';
 
-class MenuButton extends StatelessWidget {
-  const MenuButton({Key? key});
+class BottomSheetButton extends StatelessWidget {
+  const BottomSheetButton({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class MenuButton extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             builder: (BuildContext context) {
-              return const Menu();
+              return const BottomSheetMenu();
             },
           );
         }
@@ -24,7 +25,7 @@ class MenuButton extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const Menu();
+                  return const BottomSheetMenu();
                 },
               );
             },
@@ -39,31 +40,6 @@ class MenuButton extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Menu extends StatelessWidget {
-  const Menu({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      color: Colors.amber,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text('Bottom Sheet'),
-            ElevatedButton(
-              child: const Text('Close'),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        ),
       ),
     );
   }
