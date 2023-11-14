@@ -33,7 +33,6 @@ class BottomSheetButton extends StatelessWidget {
               height: 20.0,
               width: 500.0,
               child: const Divider(
-                color: Colors.black,
                 thickness: 2.0,
                 height: 1.0,
               ),

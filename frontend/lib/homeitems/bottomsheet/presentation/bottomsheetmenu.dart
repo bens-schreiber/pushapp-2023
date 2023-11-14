@@ -6,7 +6,6 @@ class BottomSheetMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      color: Colors.amber,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
