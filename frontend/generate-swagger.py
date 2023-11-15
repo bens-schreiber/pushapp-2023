@@ -1,7 +1,14 @@
+import os
 import random
 import subprocess
 
-file_path = "./lib/swag.dart"
+
+# if the executing path isn't ./frontend then exit
+if os.getcwd().split('/')[-1] != 'frontend':
+    print("Please run this script from the frontend directory")
+    exit()
+
+file_path = "./lib/schema/swagger_generator.dart"
 
 random_hash = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=32))
 new_content = "// HASH: " + random_hash

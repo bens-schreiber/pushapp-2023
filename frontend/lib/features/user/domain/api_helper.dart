@@ -11,6 +11,7 @@ final _googleSignIn = GoogleSignIn(
     clientId: googleIOSOAuthClientId,
     serverClientId: googleOAuthServerClientId);
 
+// TODO: Error handle, cache user
 abstract class ApiHelper {
   static Future<void> login() async {
     final googleUser = await _googleSignIn.signIn();
