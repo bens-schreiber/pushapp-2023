@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'bottomsheetmenu.dart';
 
 class BottomSheetButton extends StatelessWidget {
-  const BottomSheetButton({Key? key});
+  const BottomSheetButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return const BottomSheetMenu();
+          },
+        );
+      },
       onVerticalDragUpdate: (details) {
         if (details.primaryDelta! < -10) {
           showModalBottomSheet(
@@ -17,25 +25,15 @@ class BottomSheetButton extends StatelessWidget {
           );
         }
       },
-      child: Stack(
-        alignment: Alignment.center,
+      child: const Stack(
+        alignment: Alignment.topCenter,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return const BottomSheetMenu();
-                },
-              );
-            },
-            child: Container(
-              height: 20.0,
-              width: 500.0,
-              child: const Divider(
-                thickness: 2.0,
-                height: 1.0,
-              ),
+          SizedBox(
+            height: 40.0,
+            width: 300.0,
+            child: Divider(
+              thickness: 4.0,
+              height: 3.0,
             ),
           ),
         ],
