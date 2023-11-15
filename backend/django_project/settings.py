@@ -136,14 +136,15 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Swagger
-
 SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'django_project.schema.SWAGGER_APP_INFO',
     "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
         "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
-    },
+    }
 }
 
+# JWT Authentication
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",

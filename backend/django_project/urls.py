@@ -1,25 +1,14 @@
 from django.urls import path
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+
 from django.contrib import admin
+from django_project.schema import SWAGGER_SCHEMA_VIEW
 from group.views import GroupView, UserxGroupView
 from tokens.views import TokenViewSet
 from user.views import UserView, GoogleView
 
-
-SWAGGER_APP_INFO = openapi.Info(
-    title="Pushapp API",
-    default_version="v1",
-)
-
-SWAGGER_SCHEMA_VIEW = get_schema_view(
-    SWAGGER_APP_INFO,
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-)
-
 urlpatterns = [
+
+    # SWAGGER
     path(
         "",
         SWAGGER_SCHEMA_VIEW.with_ui("swagger", cache_timeout=0),
@@ -35,8 +24,12 @@ urlpatterns = [
         SWAGGER_SCHEMA_VIEW.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
+
+    # AUTH
     path("google/", GoogleView.as_view(), name="google_login"),
     path("admin/", admin.site.urls),
+
+    # API
     path("token/", TokenViewSet.as_view()),
     path("group/", GroupView.as_view()),
     path("group/user/", UserxGroupView.as_view()),

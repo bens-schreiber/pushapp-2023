@@ -1,0 +1,325 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Pushapp API",
+        "version": "v1"
+    },
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "paths": {
+        "/google/": {
+            "post": {
+                "operationId": "google_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GoogleView"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UserToken"
+                        }
+                    }
+                },
+                "tags": [
+                    "google"
+                ]
+            },
+            "parameters": []
+        },
+        "/group/": {
+            "get": {
+                "operationId": "group_list",
+                "description": "Get the group of the current user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Group"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "post": {
+                "operationId": "group_create",
+                "description": "Create a group for the current user, put the user into the group, and create a token for the group",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Group"
+                        }
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "delete": {
+                "operationId": "group_delete",
+                "description": "Delete the group of the current user",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/group/user/": {
+            "post": {
+                "operationId": "group_user_create",
+                "description": "Add a user to the group of the current user",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UserxGroup"
+                        }
+                    }
+                },
+                "tags": [
+                    "group"
+                ]
+            },
+            "parameters": []
+        },
+        "/token/": {
+            "get": {
+                "operationId": "token_list",
+                "description": "Get all tokens of the current user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Token"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "token"
+                ]
+            },
+            "patch": {
+                "operationId": "token_partial_update",
+                "description": "Update the tokens value by 1, and select a new token holder",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Token"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "token"
+                ]
+            },
+            "parameters": []
+        },
+        "/user/": {
+            "get": {
+                "operationId": "user_list",
+                "description": "Get the current user",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "tags": [
+                    "user"
+                ]
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {
+        "GoogleView": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                }
+            }
+        },
+        "UserToken": {
+            "required": [
+                "username",
+                "access_token",
+                "refresh_token"
+            ],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "access_token": {
+                    "title": "Access token",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "refresh_token": {
+                    "title": "Refresh token",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                }
+            }
+        },
+        "Group": {
+            "required": [
+                "leader"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "string",
+                    "format": "uuid",
+                    "readOnly": true
+                },
+                "leader": {
+                    "title": "Leader",
+                    "type": "integer"
+                }
+            }
+        },
+        "UserxGroup": {
+            "required": [
+                "user_id"
+            ],
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "title": "User id",
+                    "type": "integer"
+                }
+            }
+        },
+        "Token": {
+            "required": [
+                "group",
+                "holder"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "score": {
+                    "title": "Score",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "group": {
+                    "title": "Group",
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "holder": {
+                    "title": "Holder",
+                    "type": "integer"
+                }
+            }
+        },
+        "User": {
+            "required": [
+                "username"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "username": {
+                    "title": "Username",
+                    "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                    "type": "string",
+                    "pattern": "^[\\w.@+-]+$",
+                    "maxLength": 150,
+                    "minLength": 1
+                },
+                "email": {
+                    "title": "Email address",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254
+                }
+            }
+        }
+    }
+}

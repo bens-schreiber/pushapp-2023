@@ -6,29 +6,26 @@ To run the backend:
    * POSTGRES_USER = ...
    * POSTGRES_PASS = ...
 
-2. (in a seperate terminal) Create the virtual environment
+2. Run the database
+   * Start docker Daemon
+   * `docker-compose up`
+
+3. (in a seperate terminal) Create the virtual environment
    * `cd backend`
    * `python -m venv ./env`
    * `source ./env/bin/activate` OR `.\env\Scripts\Activate.ps1`
    * `pip install -r requirements.txt`
 
-2. Run the database
-   * `docker-compose up`
+4. Run the server
+   * `pwsh run-server.ps1`
 
-3. Run the server
-   * `python manage.py migrate`
-   * `python manage.py runserver`
-
-4. Make queries
+5. Make queries (TODO: Automate this)
    * To get a token, use https://developers.google.com/oauthplayground/
+   * Scope: https://www.googleapis.com/auth/userinfo.email
    * Click exchange authorization code for tokens
    * Copy the access token
    * In swagger, use the previous token in the /google route to get the app JWT token
    * Authorize by the swagger button and enter: Bearer your-access-token
-
-## Running after initial setup
-
-`./run-server.ps1`
 
 ## To run the swagger doc only
 
