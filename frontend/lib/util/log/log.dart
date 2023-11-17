@@ -11,18 +11,18 @@ Logger _logger() {
   return Logger("PushApp");
 }
 
+final _log = _logger();
+
 /*
   Wrapper for the logger package.
   TODO: Server side error logging
 */
-abstract class DebugLog {
-  static final _log = _logger();
-
-  static void logError(Object error) {
+class DebugLog {
+  void logError(Object error) {
     _log.severe(error.toString(), error, StackTrace.current);
   }
 
-  static void logWarning(String message) {
+  void logWarning(String message) {
     _log.warning(message);
   }
 }

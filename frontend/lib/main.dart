@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pushapp/features/user/application/user_status_listener.dart';
+import 'package:pushapp/feature/user/data/user_status_listener.dart';
 import 'package:pushapp/routes/go_router.dart';
 
 void main() {
@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        title: 'PushApp',
+        debugShowCheckedModeBanner: false,
+        title: "PushApp",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
