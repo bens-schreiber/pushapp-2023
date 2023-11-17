@@ -3,40 +3,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pushapp/features/user/application/user_provider.dart';
 import 'package:pushapp/features/user/domain/api_helper.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LoginButton(),
-            AuthenticationErrorDisplay(),
-          ],
-        ),
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [AuthenticationDetails(), LogoutButton()],
+      )),
     );
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () async {
-          await ApiHelper.login();
-        },
-        child: const Text("Login"));
+      onPressed: () {
+        ApiHelper.logout();
+      },
+      child: const Text('Logout'),
+    );
   }
 }
 
-class AuthenticationErrorDisplay extends ConsumerWidget {
-  const AuthenticationErrorDisplay({super.key});
+class AuthenticationDetails extends ConsumerWidget {
+  const AuthenticationDetails({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,6 +43,6 @@ class AuthenticationErrorDisplay extends ConsumerWidget {
           return Text(error.toString());
         },
         loading: () => const SizedBox.shrink(),
-        data: (_) => const SizedBox.shrink());
+        data: (data) => Text(data?.username ?? " "));
   }
 }
