@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pushapp/features/user/presentaton/login.dart';
+import 'package:pushapp/features/user/application/user_status_listener.dart';
+import 'package:pushapp/routes/go_router.dart';
 
 void main() {
+  final listeners = [
+    UserStatusListener(),
+  ];
+  for (var element in listeners) {
+    element.register();
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -10,12 +18,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
         title: 'PushApp',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginPage());
+        routerConfig: AppRouter.router);
   }
 }
