@@ -11,7 +11,7 @@ final _api =
     Openapi(interceptors: [], dio: Dio(BaseOptions(baseUrl: serverAddress)));
 
 abstract class ApiHelper {
-  static final _userStream = StreamController<User>.broadcast();
+  static final _userStream = StreamController<User?>.broadcast();
 
   static Future<void> login() async {
     final googleAuthToken = await handleGoogleSignIn();
@@ -25,14 +25,19 @@ abstract class ApiHelper {
     _userStream.sink.add(user);
   }
 
-  static Future<User> user() async {
+  static Future<void> logout() async {
+    await _userStream.stream.drain();
+    await _googleSignIn.signOut();
+  }
+
+  static Future<User?> user() async {
     if (await _userStream.stream.isEmpty) {
       await login();
     }
     return _userStream.stream.first;
   }
 
-  static Stream<User> userStream() {
+  static Stream<User?> userStream() {
     return _userStream.stream;
   }
 }

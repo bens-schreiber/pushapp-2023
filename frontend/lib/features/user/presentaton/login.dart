@@ -40,6 +40,8 @@ class AuthenticationDisplay extends ConsumerWidget {
     return user.when(
         error: (e, s) => Text("Error: $e"),
         loading: () => const SizedBox.shrink(),
-        data: (User data) => Text("User: ${data.username}"));
+        data: (User? data) => data == null
+            ? const SizedBox.shrink()
+            : Text("User: ${data.username}"));
   }
 }
