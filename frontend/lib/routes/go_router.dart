@@ -20,10 +20,11 @@ final _routes = [
   ),
 ];
 
-abstract class AppRouter {
-  // Root most navigation key, can change entire app context
-  static final rootNavigationKey = GlobalKey<NavigatorState>();
+final _rootNavigationKey = GlobalKey<NavigatorState>();
+final _router = GoRouter(routes: _routes, navigatorKey: _rootNavigationKey);
 
-  static final router =
-      GoRouter(routes: _routes, navigatorKey: rootNavigationKey);
+class AppRouter {
+  // Root most navigation key, can change entire app context
+  get rootNavigationKey => _rootNavigationKey;
+  get router => _router;
 }

@@ -14,10 +14,10 @@ class UserStatusListener extends Listener {
   void register() {
     _userStatusListener = UserHelper().userStream.listen((event) {
       if (event == null) {
-        AppRouter.router.go(AppRoute.login);
+        AppRouter().router.go(AppRoute.login);
         return;
       }
-      AppRouter.router.go(AppRoute.home);
+      AppRouter().router.go(AppRoute.home);
     });
   }
 }
