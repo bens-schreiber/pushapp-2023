@@ -11,9 +11,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [LoginButton(), AuthenticationDisplay()])),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        LoginButton(),
+        LogoutButton(),
+        AuthenticationDisplay()
+      ])),
     );
   }
 }
@@ -28,6 +30,19 @@ class LoginButton extends StatelessWidget {
           await ApiHelper.login();
         },
         child: const Text("Login"));
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () async {
+          await ApiHelper.logout();
+        },
+        child: const Text("Logout"));
   }
 }
 

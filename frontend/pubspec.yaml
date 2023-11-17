@@ -31,6 +31,10 @@ dependencies:
   # Google login
   google_sign_in: ^6.1.6
 
+  # utils
+  logging: ^1.2.0
+
+
 
 dev_dependencies:
   flutter_test:
