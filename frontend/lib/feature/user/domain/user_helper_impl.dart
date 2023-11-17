@@ -1,4 +1,4 @@
-part of "api_helper.dart";
+part of 'user_helper.dart';
 
 /*
   Uses the google_sign_in package to obtain a google auth token.
@@ -11,21 +11,16 @@ final _googleSignIn = GoogleSignIn(
 
 // Attempt to log a user in.
 Future<void> _loginImpl() async {
-  // Gather google access token
   final googleAccessToken = await _handleGoogleSignIn();
 
-  // Gather PushApp server access token
   final accessToken = await _handleServerSignIn(googleAccessToken);
 
-  // Set authorization header for all requests
-  // "Authorization": "Bearer $accessToken"
-  _api.dio.options.headers["Authorization"] = accessToken;
+  ApiHelper().setBearerAuthToken(accessToken);
 
-  // Query the logged in user
   final user = await _handleObtainUser();
 
   // Update the user stream with the authenticated user
-  ApiHelper._userStream.sink.add(user);
+  _userStream.sink.add(user);
 }
 
 // Return a google auth token via google sign in prompt
@@ -52,7 +47,7 @@ Future<String> _handleGoogleSignIn() async {
 Future<String> _handleServerSignIn(String googleAuthToken) async {
   final data = GoogleView((b) => b..token = googleAuthToken);
 
-  final response = await _api.getGoogleApi().googleCreate(data: data);
+  final response = await ApiHelper().googleApi.googleCreate(data: data);
 
   if (response.data == null) {
     throw Exception("Server sign in failed: No response");
@@ -62,12 +57,12 @@ Future<String> _handleServerSignIn(String googleAuthToken) async {
   }
 
   final accessToken = response.data!.accessToken;
-  return "Bearer $accessToken";
+  return accessToken;
 }
 
 // Return a user object from the server
 Future<User> _handleObtainUser() async {
-  final user = await _api.getUserApi().userList();
+  final user = await ApiHelper().userApi.userList();
   if (user.statusCode != 200) {
     throw Exception("Server sign in failed: ${user.statusCode}");
   }

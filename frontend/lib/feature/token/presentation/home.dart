@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pushapp/features/user/application/user_provider.dart';
-import 'package:pushapp/features/user/domain/api_helper.dart';
+import 'package:pushapp/feature/user/application/user_provider.dart';
+import 'package:pushapp/feature/user/domain/user_helper.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -24,8 +24,8 @@ class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        ApiHelper.logout();
+      onPressed: () async {
+        await UserHelper().logout();
       },
       child: const Text('Logout'),
     );

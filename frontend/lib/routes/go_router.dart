@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pushapp/features/token/presentation/home.dart';
-import 'package:pushapp/features/user/presentaton/login.dart';
+import 'package:pushapp/feature/token/presentation/home.dart';
+import 'package:pushapp/feature/user/presentaton/login.dart';
 import 'package:pushapp/routes/routes.dart';
 
 // Define all internal routes here (AppRoute -> Widget)

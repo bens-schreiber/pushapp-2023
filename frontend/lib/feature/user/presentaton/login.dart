@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pushapp/features/user/application/user_provider.dart';
-import 'package:pushapp/features/user/domain/api_helper.dart';
+import 'package:pushapp/feature/user/application/user_provider.dart';
+import 'package:pushapp/feature/user/domain/user_helper.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -29,7 +29,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () async {
-          await ApiHelper.login();
+          await UserHelper().login();
         },
         child: const Text("Login"));
   }

@@ -5,3 +5,5 @@ const kGoogleIOSOAuthClientId =
 
 const kGoogleOAuthServerClientId =
     "90615371727-ac84663btsau4lp376v0tiet0re4ks8p.apps.googleusercontent.com";
+
+const kAuthHeader = "Authorization";
