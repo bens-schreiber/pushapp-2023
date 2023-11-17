@@ -11,6 +11,10 @@ Logger _logger() {
   return Logger("PushApp");
 }
 
+/*
+  Wrapper for the logger package.
+  TODO: Server side error logging
+*/
 abstract class DebugLog {
   static final _log = _logger();
 

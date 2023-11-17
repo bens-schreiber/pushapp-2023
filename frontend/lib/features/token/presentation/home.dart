@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pushapp/features/user/application/user_provider.dart';
 import 'package:pushapp/features/user/domain/api_helper.dart';

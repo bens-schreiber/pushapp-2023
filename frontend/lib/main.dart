@@ -4,6 +4,7 @@ import 'package:pushapp/features/user/application/user_status_listener.dart';
 import 'package:pushapp/routes/go_router.dart';
 
 void main() {
+  // Register all listeners here
   final listeners = [
     UserStatusListener(),
   ];

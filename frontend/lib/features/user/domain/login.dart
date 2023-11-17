@@ -1,19 +1,30 @@
 part of "api_helper.dart";
 
+/*
+  Uses the google_sign_in package to obtain a google auth token.
+  clientId and serverClientId are OAuth2 credentials.
+*/
 final _googleSignIn = GoogleSignIn(
     scopes: ["email"],
-    clientId: googleIOSOAuthClientId,
-    serverClientId: googleOAuthServerClientId);
+    clientId: kGoogleIOSOAuthClientId,
+    serverClientId: kGoogleOAuthServerClientId);
 
+// Attempt to log a user in.
 Future<void> _loginImpl() async {
-  final googleAuthToken = await _handleGoogleSignIn();
+  // Gather google access token
+  final googleAccessToken = await _handleGoogleSignIn();
 
-  final accessToken = await _handleServerSignIn(googleAuthToken);
+  // Gather PushApp server access token
+  final accessToken = await _handleServerSignIn(googleAccessToken);
 
   // Set authorization header for all requests
+  // "Authorization": "Bearer $accessToken"
   _api.dio.options.headers["Authorization"] = accessToken;
 
+  // Query the logged in user
   final user = await _handleObtainUser();
+
+  // Update the user stream with the authenticated user
   ApiHelper._userStream.sink.add(user);
 }
 

@@ -14,10 +14,10 @@ class UserStatusListener extends Listener {
   void register() {
     _userStatusListener = ApiHelper.userStream().listen((event) {
       if (event == null) {
-        AppRouter.router.go(routeLoginPage);
+        AppRouter.router.go(AppRoute.login);
         return;
       }
-      AppRouter.router.go(routeHomePage);
+      AppRouter.router.go(AppRoute.home);
     });
   }
 }
