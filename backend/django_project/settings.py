@@ -17,9 +17,6 @@ import os
 POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
 POSTGRES_PASS: str = os.environ.get("POSTGRES_PASS")
 
-OAUTH_CLIENT: str = os.environ.get("OAUTH_CLIENT")
-OAUTH_SECRET: str = os.environ.get("OAUTH_SECRET")
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,19 +36,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "drf_yasg",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
     "group",
     "tokens",
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -62,7 +58,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -141,43 +136,21 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Swagger
-
 SWAGGER_SETTINGS = {
-    "DEFAULT_INFO": "django_project.urls.app_info",
-    "LOGIN_URL": "google_login",
-    "USE_SESSION_AUTH": True,
+    'DEFAULT_INFO': 'django_project.schema.SWAGGER_APP_INFO',
+    "USE_SESSION_AUTH": False,
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    }
 }
 
-# Oauth2
+# JWT Authentication
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
-
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
-
-SOCIALACCOUNT_LOGIN_ON_GET = True
-ACCOUNT_LOGOUT_ON_GET = True
-
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "EMAIL_AUTHENTICATION": True,
-        "APP": {
-            "client_id": OAUTH_CLIENT,
-            "secret": OAUTH_SECRET,
-            "key": "",
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
-        },
-    }
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer')
 }

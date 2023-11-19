@@ -16,6 +16,7 @@ class TokenViewSet(APIView):
 
     @swagger_auto_schema(
         operation_description="Get all tokens of the current user",
+        responses={200: TokenSerializer(many=True)},
     )
     def get(self, request, format=None):
         tokens = Token.objects.filter(holder=request.user)
@@ -24,6 +25,7 @@ class TokenViewSet(APIView):
 
     @swagger_auto_schema(
         operation_description="Update the tokens value by 1, and select a new token holder",
+        responses={200: TokenSerializer(many=True)},
     )
     def patch(self, request, format=None):
         token = get_object_or_404(Token, holder=request.user)
