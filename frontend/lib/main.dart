@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/homeitems/home.dart';
+import 'package:frontend/bottomsheet/presentation/home.dart';
 
 void main() {
   runApp(const MyApp());
