@@ -38,7 +38,7 @@ class BottomSheetButton extends StatelessWidget {
             width: 307,
             height: 6,
             decoration: ShapeDecoration(
-              color: Color(0xFF3C3B3B),
+              color: const Color(0xFF3C3B3B),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
