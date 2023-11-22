@@ -11,10 +11,14 @@ class BottomSheetMenu extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         Container(
-          height: 10.0,
-          width: 300.0,
-          decoration: BoxDecoration(
-              color: Colors.grey, borderRadius: BorderRadius.circular(10.0)),
+          width: 307,
+          height: 6,
+          decoration: ShapeDecoration(
+            color: const Color(0xFF3C3B3B),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
         ),
         SizedBox(
           height: 200,

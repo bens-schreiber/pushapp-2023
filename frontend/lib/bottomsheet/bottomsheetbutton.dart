@@ -35,11 +35,15 @@ class BottomSheetButton extends StatelessWidget {
             width: 400.0,
           ),
           Container(
-            height: 10.0,
-            width: 300.0,
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(10.0)),
-          ),
+            width: 307,
+            height: 6,
+            decoration: ShapeDecoration(
+              color: Color(0xFF3C3B3B),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+          )
         ],
       ),
     );
