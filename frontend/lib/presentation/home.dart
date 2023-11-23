@@ -7,6 +7,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Circles(), bottomSheet: BottomSheetButton());
+    return const Scaffold(
+        body: Stack(
+            children: [Positioned(left: -136, top: 25, child: Circles())]),
+        bottomSheet: BottomSheetButton());
   }
 }
