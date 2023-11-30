@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/bottomsheet/bottomsheetbutton.dart';
-import 'package:frontend/token-area/circles.dart';
+import 'package:frontend/token/presentation/bottom_sheet/bottom_sheet_button.dart';
+import 'package:frontend/token/presentation/circles.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
