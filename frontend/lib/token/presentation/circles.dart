@@ -5,9 +5,10 @@ class Circles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color circlesColor = Theme.of(context).colorScheme.outline;
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: 702,
           height: 702,
           child: Stack(
@@ -18,10 +19,9 @@ class Circles extends StatelessWidget {
                 child: Container(
                   width: 296,
                   height: 296,
-                  decoration: const ShapeDecoration(
-                    color: Color(0x00EFEFEF),
+                  decoration: ShapeDecoration(
                     shape: OvalBorder(
-                      side: BorderSide(width: 2, color: Color(0xFF535353)),
+                      side: BorderSide(width: 2, color: circlesColor),
                     ),
                   ),
                 ),
@@ -32,10 +32,9 @@ class Circles extends StatelessWidget {
                 child: Container(
                   width: 324,
                   height: 324,
-                  decoration: const ShapeDecoration(
-                    color: Color(0x00EFEFEF),
+                  decoration: ShapeDecoration(
                     shape: OvalBorder(
-                      side: BorderSide(width: 2, color: Color(0xFF535353)),
+                      side: BorderSide(width: 2, color: circlesColor),
                     ),
                   ),
                 ),
@@ -46,10 +45,9 @@ class Circles extends StatelessWidget {
                 child: Container(
                   width: 377,
                   height: 377,
-                  decoration: const ShapeDecoration(
-                    color: Color(0x00EFEFEF),
+                  decoration: ShapeDecoration(
                     shape: OvalBorder(
-                      side: BorderSide(width: 2, color: Color(0xFF3B3A3A)),
+                      side: BorderSide(width: 2, color: circlesColor),
                     ),
                   ),
                 ),
@@ -60,10 +58,9 @@ class Circles extends StatelessWidget {
                 child: Container(
                   width: 473,
                   height: 473,
-                  decoration: const ShapeDecoration(
-                    color: Color(0x00EFEFEF),
+                  decoration: ShapeDecoration(
                     shape: OvalBorder(
-                      side: BorderSide(width: 2, color: Color(0xFF3B3A3A)),
+                      side: BorderSide(width: 2, color: circlesColor),
                     ),
                   ),
                 ),
@@ -74,10 +71,9 @@ class Circles extends StatelessWidget {
                 child: Container(
                   width: 581,
                   height: 581,
-                  decoration: const ShapeDecoration(
-                    color: Color(0x00EFEFEF),
+                  decoration: ShapeDecoration(
                     shape: OvalBorder(
-                      side: BorderSide(width: 2, color: Color(0xFF3B3A3A)),
+                      side: BorderSide(width: 2, color: circlesColor),
                     ),
                   ),
                 ),
